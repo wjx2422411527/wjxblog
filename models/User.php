@@ -1,10 +1,10 @@
 <?php 
 namespace models;
 
- class Us
+ class User
 {
     public function getName()
     {
-        return 'wjx';
+        return '王景笑';
     }
 }

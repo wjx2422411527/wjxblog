@@ -13,7 +13,14 @@ class UserController
         $name = $user->getName();
 
         // 加载视图
-        view('users.hello');
-        'name' => $name
+        view('users.hello', [
+         'name' => $name
+        ]);
+
     }
+    public function world()
+    {
+        echo "world";
+    }
+
 }
