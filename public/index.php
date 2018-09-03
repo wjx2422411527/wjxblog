@@ -43,7 +43,7 @@ $_C->$action();
 // 参数二，向视图中传的数据
 function view($viewFileName,$data=[])
 {
-    // 解压数组变量
+    // 解压数组变量 
     extract($data);
     $path = str_replace('.','/',$viewFileName).'.html';
 
