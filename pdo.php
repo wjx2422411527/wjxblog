@@ -9,23 +9,45 @@ $pdo = new PDO("mysql:host={$host};dbname={$dbname}", $user, $pass);
 // 设置编码
 $pdo->exec('SET NAMES utf8');
 
-$id = $_GET['id'];
+$stmt = $pdo->prepare('INSERT INTO blogs(title,content) VALUES(?,?)');
+$ret = $stmt->execute([
+    '标题xx',
+    '内容xx',
+]);
+if($ret)
+{
+echo "添加成功新纪录的ID=".$pdo->lastInsertId();
+}
+else
+{   
+    $error = $stmt->errorInfo();
+    var_dump($error);
+}
+
+
+
+
+
+/*$id = $_GET['id'];
 $title = $_GET['title'];
 
-$sql = "DELETE FROM blogs WHERE id= ? title = ?";
+$sql = "DELETE FROM blogs WHERE id= ?OR title = ?";
 $stmt = $pdo->prepare($sql);
-$stmt->execute([
+$ret = $stmt->execute([
     $id,
     $title
 ]);
-
+if(!$ret)
+{
+    die('出错了！');
+}
 
 $sql = "DELETE FROM blogs WHERE id= :blogid OR title = :title";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([
     ':title' =>$title,
     ':blogid' =>$id, 
-]);
+]);*/
 
 
 // 取出前十条
