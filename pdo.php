@@ -65,11 +65,13 @@ $stmt->execute([
 // for($i=0;$i<100;$i++){
 //     $title = getChar(rand(20,100));
 //     $content = getChar(rand(100,500));
-//     $ret = $pdo->exec("INSERT INTO blogs(title,content) VALUES('$title','$content')");
-
+//     $date = date('Y-m-d H:i:s');
+//     var_dump($date);
+//     $ret = $pdo->exec("INSERT INTO blogs(title,content,created_at) VALUES('$title','$content','$date')");
+//     // var_dump($ret);
 // }
 
-//     function getChar($rum)
+//     function getChar($num)
 //     {
 //         $b = '';
 //         for ($i=0; $i<$num; $i++) {
