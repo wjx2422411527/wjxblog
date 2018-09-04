@@ -5,6 +5,6 @@ class IndexController
 {
     public function index()
     {
-        phpinfo();
+        echo('王景笑');
     }
 }
