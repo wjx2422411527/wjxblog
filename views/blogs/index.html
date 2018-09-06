@@ -1,28 +1,58 @@
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
+
 <body>
     <h1>日志列表</h1>
+    <form action="">
+        <div>
+            关键字:<input type="text" name="keyword">发表日期：<input type="text" name="start_date">~<input type="text" name="end_date">是否显示:<input
+                type="radio" name="is_show" value="" checked>全部<input type="radio" name="is_show" value="1">显示<input type="radio"
+                name="is_show" value="0">不显示<input type="submit" value="搜索">
+        </div>
+    </form>
     <table border="1" width="100%">
         <tr>
             <th>ID</th>
-            <th width="50%">标题</th>
-            <th width="20%">发表日期</th>
+            <th>标题</th>
+            <th>
+                发表日期
+                <a <?php if(@$_GET[ 'order_by']=='date' && @$_GET[ 'order_way']=='asc' ) echo 'class="order_active"' ?> href="?order_by=date&order_way=asc">∧</a>
+                <a <?php if(@$_GET[ 'order_by']=='date' && @$_GET[ 'order_way']=='desc' ) echo 'class="order_active"' ?> href="?order_by=date&order_way=desc">∨</a>
+            </th>
             <th>修改日期</th>
+
             <th>是否显示</th>
-            <th>浏览量</th>    
+            <th>
+                浏览量
+                <a <?php if(@$_GET[ 'order_by']=='display' && @$_GET[ 'order_way']=='asc' ) echo 'class="order_active"' ?> href="?order_by=display&order_way=asc">∧</a>
+                <a <?php if(@$_GET[ 'order_by']=='display' && @$_GET[ 'order_way']=='desc' ) echo 'class="order_active"' ?> href="?order_by=display&order_way=desc">∨</a>
+            </th>
             <th>操作</th>
-        </tr> 
+        </tr>
         <?php foreach($data as $v):?>
         <tr>
-            <td><?=$v['id']?></td>
-            <td><?=$v['title']?></td>
-            <td><?=$v['created_at']?></td>
-            <td><?=$v['updated_at']?></td>
-            <td><?=$v['is_show']?></td>
-            <td><?=$v['dispaly']?></td>
+            <td>
+                <?=$v['id']?>
+            </td>
+            <td>
+                <?=$v['title']?>
+            </td>
+            <td>
+                <?=$v['created_at']?>
+            </td>
+            <td>
+                <?=$v['updated_at']?>
+            </td>
+            <td>
+                <?=$v['is_show']?>
+            </td>
+            <td>
+                <?=$v['dispaly']?>
+            </td>
             <td>
                 <a href="">修改</a>
                 <a href="">删除</a>
@@ -31,4 +61,5 @@
         <?php endforeach;?>
     </table>
 </body>
+
 </html>
