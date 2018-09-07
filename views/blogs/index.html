@@ -2,6 +2,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <style>
+        .active{
+            font-weight: bold;
+            color: #f00;
+            font-size: 2em;
+        }
+    </style>
 </head>
 <body>
     <h1>日志列表</h1>
@@ -33,9 +40,11 @@
             <td>
                 <a href="">修改</a>
                 <a href="">删除</a>
-            </td>
+            </td    >
         </tr>
         <?php endforeach;?>
     </table>
+    <br>
+    <?=$btns?>
 </body>
 </html>

@@ -50,3 +50,7 @@ function view($viewFileName,$data=[])
     // 加载视图
     require(ROOT. '/views/' .$path);
 }
+
+function getUrlParams(){
+    
+}

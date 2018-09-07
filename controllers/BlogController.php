@@ -19,7 +19,7 @@ class BlogController
        {
         $where .=" AND (title LIKE '%{$_GET['keyword']}%' OR content LIKE '%{$_GET['keyword']}%')"; 
        } 
-
+    
         // 发表时间搜索   
         if(isset($_GET['start_data']) && $_GET['start_data'])
         {
@@ -38,27 +38,32 @@ class BlogController
         } 
 
 
-        // 默认的排序条件
-        $orderBy = 'created_at';
-        $orderyWay = 'desc';
+        /* 分页 */
+        $perpage = 10; //每页显示10条数据
+        // 接受当前页码
+        $page = isset($_GET['page']) ? max(1,(int)$_GET['page']) : 1 ;
+        // 计算开始的下标
+        $offset = ($page-1)*$perpage;
+        // 制作按钮
+        // 取出总的记录数
+        $stmt = $pdo->prepare("SELECT COUNT(*)FROM blogs WHERE $where");
+        $stmt->execute();
+        $count = $stmt->fetch(PDO::FETCH_COLUMN);
 
-        // 设置排序字段
-        if(isset($_GET['order_by']) && $_GET['order_by'] == 'display')
+        // 计算总的页数
+        $pageCount =ceil( $count / $perpage);
+
+        $btns = '';
+        for($i=1; $i<=$pageCount; $i++)
         {
-            $orderBy = 'display';
-        }
-        // 设置排序方式
-        if(isset($_GET['order_way']) && $_GET['order_way'] == 'asc')
-        {
-            $orderyWay = 'asc';
-        }
-        
-
-
-
+            $params = getUrlParams(['page']);
+            // 给当前页数的页码设置样式
+            $class = $page==$i ? 'active' :'';
+           $btns .= "<a class='$class'  href='?{$params}page=$i'>$i</a>";
+        } 
 
         // 执行SQL
-        $stmt = $pdo->query("SELECT * FROM blogs WHERE $where");
+        $stmt = $pdo->query("SELECT * FROM blogs WHERE $where LIMIT $offset,$perpage");
         // 取数据
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo '<pre>';
@@ -66,6 +71,7 @@ class BlogController
         // 加载视图
         view('blogs.index',[
             'data' => $data,
+            'btns' => $btns,
         ]);
     }
 }
