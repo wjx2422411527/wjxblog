@@ -12,23 +12,33 @@ spl_autoload_register('autoload');
  
 // 添加路由：解析 URL 上的路径：控制器/方法
 // 获取URL
-if( isset($_SERVER['PATH_INFO']))
+// 添加路由：解析 URL 浏览器上 blog/index CLI中就是blog index
+if(php_sapi_name() == 'cli')
 {
-    $pathInfo = $_SERVER['PATH_INFO'];
-    // 根据 / 转换数组
-    $pathInfo = explode('/',$pathInfo);
-
-    // 得到控制器名和方法名;
-    $controller = ucfirst($pathInfo[1]) .'Controller';
-    $action = $pathInfo[2]; 
-
+    $controller = ucfirst($argv[1]) . 'Controller';
+    $action = $argv[2];
 }
 else
 {
-    // 默认控制器和方法
-    $controller = 'IndexController';
-    $action = 'index';
+    if( isset($_SERVER['PATH_INFO']))
+    {
+        $pathInfo = $_SERVER['PATH_INFO'];
+        // 根据 / 转换数组
+        $pathInfo = explode('/',$pathInfo);
+    
+        // 得到控制器名和方法名;
+        $controller = ucfirst($pathInfo[1]) .'Controller';
+        $action = $pathInfo[2]; 
+    
+    }
+    else
+    {
+        // 默认控制器和方法
+        $controller = 'IndexController';
+        $action = 'index';
+    }
 }
+
     // 为控制器添加命名空间
     $fullController = 'controllers\\'.$controller;
 
