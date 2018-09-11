@@ -2,7 +2,6 @@
 namespace controllers;
 
 use models\Blog;
-
 class BlogController
 {
     // 日志列表
@@ -46,6 +45,7 @@ class BlogController
         {
             // 累加 返回添加完之后的值
            $newNum = $redis->hincrby('blog_displays',$key,1);
+           echo $newNum;
         }
         else
         {
@@ -54,8 +54,8 @@ class BlogController
             $display = $blog->getDisplay($id);
             $display++;
             // 加到redis
-            $redis->hset('blog_displyas',$key,$display);
-            echo $display;
+            $redis->hset('blog_displays',$key,$display);
+            return $display;  
         }
     }
 }
