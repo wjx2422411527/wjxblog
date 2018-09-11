@@ -2,6 +2,9 @@
 // 定义常量
 define('ROOT', dirname(__FILE__) . '/../');
 
+// 引入composer自动加载文件
+require(ROOT.'vendor/autoload.php');
+
 // 实现类的自动加载
 function autoload($class)
 {
