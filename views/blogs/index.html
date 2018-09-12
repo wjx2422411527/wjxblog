@@ -19,13 +19,13 @@
     </form>
     <table border="1" width="100%" >
         <tr>
-            <th>ID</th>
+            <th width="2%">ID</th>
             <th width="50%">标题</th>
-            <th width="20%">发表日期</th>
-            <th>修改日期</th>
-            <th>是否显示</th>
-            <th>浏览量</th>    
-            <th>操作</th>
+            <th width="13%">发表日期</th>
+            <th width="13%">修改日期</th>
+            <th width="5%">浏览量</th>  
+            <th width="5%">是否显示</th>  
+            <th width="5%">操作</th>
         </tr> 
         <?php foreach($data as $v):?>
         <tr>
@@ -33,8 +33,9 @@
             <td><a href="/contents/<?=$v['id']?>.html"><?=$v['title']?></a></td>
             <td><?=$v['created_at']?></td>
             <td><?=$v['updated_at']?></td>
+            <td><?=$v['display']?></td>
             <td><?=$v['is_show']?></td>
-            <td><?=$v['dispaly']?></td>
+
             <td>
                 <a href="">修改</a>
                 <a href="">删除</a>
