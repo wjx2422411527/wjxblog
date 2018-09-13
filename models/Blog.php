@@ -127,4 +127,27 @@ class Blog
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_COLUMN);
     }
+
+    // 把内存中浏览量会写到数据库中
+    public function displayToDb()
+    {
+        // 先取出内存中所有的浏览量
+        // 连接redis
+         $redis = new \Predis\Client([
+            'scheme' => 'tcp',
+            'host' => '127.0.0.1',
+            'port' => 6379,
+        ]);
+
+        $data = $redis->hgetall('blog_displays');
+
+        // 更新回数据库
+        foreach($data as $k => $v)
+        {
+        $id = str_replace('blog-', '',$k);
+        $sql = "UPDATE blogs SET display={$v} WHERE id = {$id}";
+        $this->pdo->exec($sql);
+        }
+
+    }
 }

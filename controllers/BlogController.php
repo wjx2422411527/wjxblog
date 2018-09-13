@@ -58,4 +58,9 @@ class BlogController
             return $display;  
         }
     }
+    public function displayToDb()
+    {
+        $blog = new Blog;
+        $blog->displayToDb();
+    }
 }

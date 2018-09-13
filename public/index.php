@@ -46,8 +46,8 @@ else
     $fullController = 'controllers\\'.$controller;
 
 
-$_C = new $fullController;
-$_C->$action();
+    $_C = new $fullController;
+    $_C->$action();
 
 
 
