@@ -6,7 +6,7 @@ class TestController
     public function register()
     {
         // 注册成功
-
+ 
         
         // 发邮件
     // 连接redis

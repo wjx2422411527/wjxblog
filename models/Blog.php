@@ -10,7 +10,7 @@ class Blog
     public function __construct()
     {
         // 取日志的数据
-        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=blog','root','');
+        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=blog','root','123456');
         // 设置数据库编码
         $this->pdo->exec('SET NAMES utf8');
     }
