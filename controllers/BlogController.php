@@ -32,11 +32,7 @@ class BlogController
         $id = (int)$_GET['id'];
 
         // 连接redis
-        $redis = new \Predis\Client([
-            'scheme' => 'tcp',
-            'host' => '127.0.0.1',
-            'port' => 6379,
-        ]);
+        $redis =\libs\Redis::getInstance();
         // 判断redis是否有这篇日志的浏览量
         $key = "blog-{$id}"; //拼出日志的键
 

@@ -3,18 +3,8 @@ namespace models;
 
 use PDO;
 
-class Blog
+class Blog  extends Base
 {
-    // 保存 PDO 对象
-    public $pdo;
-    public function __construct()
-    {
-        // 取日志的数据
-        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=blog','root','123456');
-        // 设置数据库编码
-        $this->pdo->exec('SET NAMES utf8');
-    }
-
     // 搜索日志
     public function search()
     {
@@ -53,7 +43,7 @@ class Blog
         $offset = ($page-1)*$perpage;
         // 制作按钮
         // 取出总的记录数
-        $stmt = $this->pdo->prepare("SELECT COUNT(*)FROM blogs WHERE $where");
+        $stmt =self::$pdo->prepare("SELECT COUNT(*)FROM blogs WHERE $where");
         $stmt->execute();
         $count = $stmt->fetch(PDO::FETCH_COLUMN);
 
@@ -70,7 +60,7 @@ class Blog
         } 
 
         // 执行SQL
-        $stmt = $this->pdo->query("SELECT * FROM blogs WHERE $where LIMIT $offset,$perpage");
+        $stmt = self::$pdo->query("SELECT * FROM blogs WHERE $where LIMIT $offset,$perpage");
         // 取数据
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -81,7 +71,7 @@ class Blog
     }
     public function content2html()
     {
-    $stmt = $this->pdo->query('SELECT * FROM blogs');
+    $stmt = self::$pdo->query('SELECT * FROM blogs');
     $blogs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     ob_start();
@@ -103,7 +93,7 @@ class Blog
     public function index2html()
     {
         // 取前二十条记录数据
-        $stmt =  $this->pdo->query("SELECT * FROM blogs WHERE is_show=1 ORDER BY id DESC LIMIT 20");
+        $stmt =  self::$pdo->query("SELECT * FROM blogs WHERE is_show=1 ORDER BY id DESC LIMIT 20");
         $blogs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // 开启一个缓冲区
@@ -123,7 +113,7 @@ class Blog
     // 从数据库中取出日志的浏览量   
     public function getDisplay($id)
     {
-        $stmt = $this->pdo->prepare('SELECT dispaly FROM blogs WHERE id=?');
+        $stmt = self::$pdo->prepare('SELECT dispaly FROM blogs WHERE id=?');
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_COLUMN);
     }
@@ -133,11 +123,7 @@ class Blog
     {
         // 先取出内存中所有的浏览量
         // 连接redis
-         $redis = new \Predis\Client([
-            'scheme' => 'tcp',
-            'host' => '127.0.0.1',
-            'port' => 6379,
-        ]);
+         $redis = \libs\Redis::getInstance();;
 
         $data = $redis->hgetall('blog_displays');
 
@@ -146,7 +132,7 @@ class Blog
         {
         $id = str_replace('blog-', '',$k);
         $sql = "UPDATE blogs SET display={$v} WHERE id = {$id}";
-        $this->pdo->exec($sql);
+        self::$pdo->exec($sql);
         }
 
     }

@@ -1,10 +1,14 @@
 <?php 
 namespace models;
 
- class User
+ class User extends Base
 {
-    public function getName()
+    public function add($email,$password)
     {
-        return '王景笑';
+        $stmt = self::$pdo->prepare("INSERT INTO users (email,password) VALUES(?,?)");
+        return $stmt->execute([
+            $email,
+            $password
+        ]);
     }
 }
