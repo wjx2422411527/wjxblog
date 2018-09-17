@@ -11,6 +11,8 @@ class Redis
     
     public function __getInstance()
     {
+        // 从配置文件中读取账号
+        $config = config('redis');
         if(self::$redis === null)
         {
         // 连接redis
