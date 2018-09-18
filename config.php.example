@@ -1,0 +1,23 @@
+<?php
+return [
+    'redis' => [
+        'scheme' => 'tcp',
+        'host'   => '127.0.0.1',
+        'port'   => 6379,
+    ],
+    'db' => [
+        'host' => '127.0.0.1',
+        'dbname' => 'blog',
+        'user' => 'root',
+        'pass' => '',
+        'charset' => 'utf8',
+    ],
+    'email' => [
+        'port' => 25,
+        'host' => 'smtp.126.com',
+        'name' => 'wjx2422411527@126.com',
+        'pass' => 'wangjingxiao123',
+        'from_email' => 'wjx2422411527@126.com',
+        'from_name' => '全栈1班',
+    ]
+];

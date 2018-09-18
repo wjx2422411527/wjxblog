@@ -67,12 +67,16 @@ function view($viewFileName,$data=[])
 function getUrlParams(){
     
 }
+
+
 // 获取配置文件
 function config($name)
 {
-// 引入配置文件
-$config = require_once(ROOT.'config.php');
-
-return $config[$name];
+    static $config = null;
+    if($config === null){
+        // 引入配置文件
+        $config = require_once(ROOT.'config.php');
+    }
+        return $config[$name];
 
 }
