@@ -9,7 +9,7 @@ class Redis
     private function __clone(){}
     private function __construct(){}
     
-    public function __getInstance()
+    static function getInstance()
     {
         // 从配置文件中读取账号
         $config = config('redis');

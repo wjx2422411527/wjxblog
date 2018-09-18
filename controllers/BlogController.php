@@ -41,7 +41,9 @@ class BlogController
         {
             // 累加 返回添加完之后的值
            $newNum = $redis->hincrby('blog_displays',$key,1);
-           echo $newNum;
+           echo json_encode([
+               'display'=>$newNum
+           ]);
         }
         else
         {
@@ -51,7 +53,7 @@ class BlogController
             $display++;
             // 加到redis
             $redis->hset('blog_displays',$key,$display);
-            return $display;  
+            echo $display;  
         }
     }
     public function displayToDb()

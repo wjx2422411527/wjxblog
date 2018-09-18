@@ -27,8 +27,10 @@
     $.ajax({
         type:"GET",
         url:url,
+        dataType:"json",
         success:function(data)
         {
+           
             // 返回值放到浏览量页面
             $("#display").html(data.display);
         }

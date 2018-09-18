@@ -63,6 +63,12 @@ class TestController
         
     }
     }
+
+    public function testMail1()
+    {
+        $mail = new \libs\Mail;
+        $mail->send('测试meila类','测试mail类',['wjx2422411527@126.com','王景笑']);
+    }
     public function testMail()
     {
         // 设置邮件服务器账号
