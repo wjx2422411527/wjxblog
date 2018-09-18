@@ -52,6 +52,6 @@ class UserController
             'port'   => 6379,
         ]);
         $redis->lpush('email', $message);
-                echo 'ok';
+        echo 'ok';
     }
 }
