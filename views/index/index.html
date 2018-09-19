@@ -5,9 +5,10 @@
     <title>首页</title>
 </head>
 <body>
+    <?php view('common.nav') ?>
     <h1>最新发表的日志</h1>
     <ul>
-        <?php foreach($blogs as $v):?>
+        <?php foreach($data as $v):?>
 
         <li>
             <a target="_blank" href="/contents/<?=$v['id']?>.html">
@@ -17,5 +18,6 @@
 
         <?php endforeach;?>
     </ul>
+    <?=view('common.footer')?>
 </body>
 </html>

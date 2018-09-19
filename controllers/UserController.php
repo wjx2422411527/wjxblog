@@ -6,7 +6,12 @@ use models\User;
 
 class UserController
 {
+    public function login()
+    {
+        view('users.login');
+    }
     
+
     public function register()
     {
         // 显示视图

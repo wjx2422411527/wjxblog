@@ -5,6 +5,12 @@ use PDO;
 
 class Blog  extends Base
 {
+
+    public function getBlog(){
+        $stmt =  self::$pdo->query("SELECT * FROM blogs WHERE is_show=1 ORDER BY id DESC LIMIT 20");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    }
     // 搜索日志
     public function search()
     {
