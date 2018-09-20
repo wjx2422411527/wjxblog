@@ -5,11 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        .no1{
+            color: green;
+        }
+    </style>
 </head>
 <body>
-    <h1>操作成功</h1>
+    <h1 class="no1">操作成功</h1>
     <p><?=$message?></p>
     <p><a href="<?=$url?>">点击跳转</a></p>
-    <p><?=$seconds?>几秒后跳转到下一个页面 </p>
+    <p><span id="sec"><?=$seconds?></span>秒后跳转到下一个页面 </p>
 </body>
 </html>
+<script>
+    // 把秒数保存到js中
+    var sec = "<?=$seconds?>";
+    // 获取放秒的span标签
+    var sp = document.getElementById('sec');
+    // 启动每秒执行的定时器
+    setInterval(function(){
+        // 秒数减一
+        sec--;
+        // 如果减到零就跳转 否则更新页面的秒数
+        if(sec == 0)
+        location.href = '<?=$url?>';
+        else
+        // 秒数放到 span 标签中
+        sp.innerHTML = sec;
+    },1000);
+</script>

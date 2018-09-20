@@ -9,7 +9,7 @@ class UserController
     public function logout(){
         $_SESSION = [];
         // header("Location:/user/login");
-        success('退出成功',1,'/');
+        success('退出成功',2,'/');
     }
     // 处理登录表单
     public function dologin()

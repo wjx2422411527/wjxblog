@@ -1,3 +1,26 @@
+<?php if(isset($_SESSION['_MESS_'])):?>
+    <div id="_mess_" style="
+    border:1px solid rgb(32, 175, 39);
+    background-color:rgba(9, 255, 103, 0.952);
+    padding:5px;
+    ">
+        <?=$_SESSION['_MESS_']?>
+    </div>
+<?php unset($_SESSION['_MESS_'])?>
+<?php endif;?>
+
+<script>
+    var m =document.getElementById('_mess_');
+    var s = 3;
+    setInterval(function(){
+        s--;
+        if(s==0)
+        {
+            m.style.display='none';
+            clearInterval($i);
+        }
+    },1000); 
+</script>
 <h2>
     智聊项目
 </h2>

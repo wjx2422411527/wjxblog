@@ -85,7 +85,7 @@ function config($name)
 
 function redirect($url)
 {
-    header('Location:' . $ur);
+    header('Location:' . $url);
     exit;
 }
 
@@ -109,7 +109,10 @@ function success($message,$type,$url,$seconds = 5)
     }
     else if($type == 2)
     {
-
+        // 把消息保存到session
+        $_SESSION['_MESS_'] = $message;
+        // 跳转到下一个页面
+        redirect($url);
     }
 }
 
