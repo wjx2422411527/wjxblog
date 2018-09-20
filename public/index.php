@@ -85,6 +85,36 @@ function config($name)
 
 function redirect($url)
 {
-    header('Location:',$ur);
+    header('Location:' . $ur);
     exit;
+}
+
+// 操作成功提示消息为绿色
+// seconds只有在 type=1时有效 ，代码几秒自动跳转
+function success($message,$type,$url,$seconds = 5)
+{
+    if($type==0)
+    {
+        echo "<script>alert('{$message}');location.href='{$url}';</script>";
+        exit;
+    }
+    else if($type == 1)
+    {
+        // 加载消息页面
+        view('common.success',[
+            'message' => $message,
+            'url' => $url,
+            'seconds' => $seconds
+        ]);
+    }
+    else if($type == 2)
+    {
+
+    }
+}
+
+// 操作失败的时候提示红色
+function error()
+{
+
 }
