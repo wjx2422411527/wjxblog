@@ -33,7 +33,9 @@ class User
             $password
         ]);
         // 取出数据
-        $user = $stmt->fetchAll();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        // var_dump($user);
+        // die;
         // 是否有这个账号
         if($user)
         {

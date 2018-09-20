@@ -1,9 +1,20 @@
-
 <h2>
     智聊项目
 </h2>
 <a href="/index/indexs">首页</a>
+
+<?php if( isset($_SESSION['id']) ): ?>
+
+<?=$_SESSION['email']?>
+
+<a href="/user/logout">退出</a>
+
+
+<?php else: ?>
+
 <a href="/user/register">注册</a>
 <a href="/user/login">登录</a>
+
+<?php endif;?>
 <a href="/index/index">最新发表日志</a>
 <hr>

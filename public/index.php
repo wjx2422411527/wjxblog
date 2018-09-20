@@ -1,7 +1,9 @@
 <?php
 // 定义常量
 define('ROOT', dirname(__FILE__) . '/../');
-
+ini_set("session.save_handler","redis");
+ini_set("session.save_path","tcp://127.0.0.1:6379");
+session_start();
 // 引入composer自动加载文件
 require(ROOT.'vendor/autoload.php');
 
@@ -79,4 +81,10 @@ function config($name)
     }
         return $config[$name];
 
+}
+
+function redirect($url)
+{
+    header('Location:',$ur);
+    exit;
 }

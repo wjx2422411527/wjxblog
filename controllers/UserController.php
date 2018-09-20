@@ -6,6 +6,10 @@ use \models\User;
 
 class UserController
 {
+    public function logout(){
+        $_SESSION = [];
+        header("Location:/user/login");
+    }
     // 处理登录表单
     public function dologin()
     {
@@ -17,7 +21,8 @@ class UserController
         $user = new User;
         if($user->login($email,$password))
         {
-            die("登录成功");
+            // var_dump($_SESSION);
+            header('Location:/index/index');
         }
         else
         {
@@ -43,7 +48,7 @@ class UserController
         // 插入数据库中
         $user = new User;
         $ret = $user->add($email,$password);
-        var_dump($ret);die;
+        // var_dump($ret);die;
 
         if(!$ret)
         {
