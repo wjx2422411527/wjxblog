@@ -19,8 +19,32 @@ class User
     {
         $stmt = $this->pdo->prepare("INSERT INTO users (email,password) VALUES(?,?)");
         return $stmt->execute([
-                                $email,
-                                $password,
-                            ]);
+            $email,
+            $password,
+    ]); 
+    }
+    public function login($email,$password)
+    {
+        // 根据email和password查询数据库
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email=? AND password=?");
+        // 执行SQL
+        $stmt->execute([
+            $email,
+            $password
+        ]);
+        // 取出数据
+        $user = $stmt->fetchAll();
+        // 是否有这个账号
+        if($user)
+        {
+            // 登录成功，把用户信息保存在session
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['email'] = $user['email'];
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;   
+        }
     }
 }

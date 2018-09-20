@@ -2,16 +2,33 @@
 namespace controllers;
 
 // 引入模型类
-use models\User;
+use \models\User;
 
 class UserController
 {
+    // 处理登录表单
+    public function dologin()
+    {
+        // 接受表单
+        $email = $_POST['email'];
+        $password = md5($_POST['password']);
+
+        // 使用模型
+        $user = new User;
+        if($user->login($email,$password))
+        {
+            die("登录成功");
+        }
+        else
+        {
+            die("用户名或者密码错误");
+        }
+    }
     public function login()
     {
         view('users.login');
     }
     
-
     public function register()
     {
         // 显示视图
