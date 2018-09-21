@@ -14,7 +14,7 @@ class User
         $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=blog', 'root', '123456');
         $this->pdo->exec('SET NAMES utf8');
     }
-
+    
     public function add($email,$password)
     {
         $stmt = $this->pdo->prepare("INSERT INTO users (email,password) VALUES(?,?)");
@@ -49,4 +49,5 @@ class User
             return FALSE;   
         }
     }
+    
 }

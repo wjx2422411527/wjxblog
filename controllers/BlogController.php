@@ -4,6 +4,12 @@ namespace controllers;
 use models\Blog;
 class BlogController
 {
+    // 显示添加日志的表单
+    public function create()
+    {
+        view('blogs.create');
+    }
+
     // 日志列表
     public function index()
     {
