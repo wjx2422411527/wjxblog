@@ -6,6 +6,28 @@ use PDO;
 class Blog  extends Base
 {
 
+    public function add($title,$content,$is_show)
+    {
+        $stmt = self::$pdo->prepare("INSERT INTO blogs(title,content,is_show,user_id)VALUES(?,?,?,?)");
+        $ret = $stmt->execute([
+            $title,
+            $content,
+            $is_show,
+            $_SESSION['id'],
+        ]);
+        if(!$ret)
+        {
+            echo '失败';
+            // 获取失败消息
+            $error = $stmt->errorInfo();
+            echo '<pre>';
+            // var_dump($error);
+            exit;
+        }
+        // 返回新插入的记录ID
+        return self::$pdo->lastInsertId();
+    }
+
     public function getBlog(){
         $stmt =  self::$pdo->query("SELECT * FROM blogs WHERE is_show=1 ORDER BY id DESC LIMIT 20");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -88,8 +110,6 @@ class Blog  extends Base
             'blog' =>$v,
         ]);
         $str = ob_get_contents();
-
-      
          
        file_put_contents(ROOT.'public/contents/'.$v['id'].'.html',$str);
       
@@ -128,7 +148,7 @@ class Blog  extends Base
     public function displayToDb()
     {
         // 先取出内存中所有的浏览量
-        // 连接redis
+        // 连接redisx
          $redis = \libs\Redis::getInstance();;
 
         $data = $redis->hgetall('blog_displays');
